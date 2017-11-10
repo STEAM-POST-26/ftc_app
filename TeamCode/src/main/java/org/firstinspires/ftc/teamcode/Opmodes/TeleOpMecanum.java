@@ -51,7 +51,7 @@ import org.firstinspires.ftc.teamcode.HardwareProfiles.HardwareTestPlatform;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "COMP TeleOpRearWheelDrive OpModeMecanum", group = "COMP")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop", group = "COMP")
 
 public class TeleOpMecanum extends LinearOpMode {
     /**
@@ -101,8 +101,8 @@ public class TeleOpMecanum extends LinearOpMode {
             }
 
             if (gamepad1.left_bumper) {
-                robot.servoLiftRight.setPosition(.75);
-                robot.servoLiftLeft.setPosition(.25);
+                robot.servoLiftRight.setPosition(0);
+                robot.servoLiftLeft.setPosition(1);
             }
 
             if (gamepad1.right_trigger > 0) {
@@ -117,6 +117,16 @@ public class TeleOpMecanum extends LinearOpMode {
             }
             else {
                 robot.motorLift.setPower(0);
+            }
+
+            if (gamepad1.a == true)
+            {
+                robot.servoLinear.setPosition(1);
+            }
+
+            if (gamepad1.b == true)
+            {
+                robot.servoLinear.setPosition(.2);
             }
 
             telemetry.addData("left_stick_x", String.valueOf(gamepad1.left_stick_x));

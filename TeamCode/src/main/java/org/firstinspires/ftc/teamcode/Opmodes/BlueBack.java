@@ -8,35 +8,26 @@ package org.firstinspires.ftc.teamcode.Opmodes;
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
-import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuMarkInstanceId;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.HardwareProfiles.HardwareTestPlatform;
 import org.firstinspires.ftc.teamcode.Libs.DataLogger;
 import org.firstinspires.ftc.teamcode.Libs.DriveMecanum;
-import org.firstinspires.ftc.teamcode.Libs.VuforiaLib;
 
 /**
  * Name the opMode and put it in the appropriate group
  */
-@Autonomous(name = "Mecanum Gyro VuMark", group = "COMP")
-@Disabled
-public class MecanumGyroVUMark extends LinearOpMode {
+@Autonomous(name = "Blue Back", group = "COMP")
+
+public class BlueBack extends LinearOpMode {
 
     /**
      * Instantiate all objects needed in this class
@@ -127,6 +118,7 @@ public class MecanumGyroVUMark extends LinearOpMode {
 
 
         robot.servoLeft.setPosition(1);
+        robot.servoRight.setPosition(0);
 
 
         sleep(2000);
@@ -156,10 +148,10 @@ public class MecanumGyroVUMark extends LinearOpMode {
                     telemetry.update();
 
                     robot.motorLift.setPower(1);
-                    sleep(500);
+                    sleep(750);
                     robot.motorLift.setPower(0);
 
-                    robot.servoLeft.setPosition(1);
+                    robot.servoRight.setPosition(0);
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.addData("SERVO position", robot.servoLeft.getPosition());
                     telemetry.update();
@@ -256,34 +248,34 @@ public class MecanumGyroVUMark extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
-                    drive.translateRange(.2, 0, 28);
+                    drive.translateRange(.2, 0, 25);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateRange(.2, 90, 23);
+                    drive.translateRange(.2, 90, 22);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(2, .2, 90);
+                    drive.translateTime(5, .2, 90);
                     sleep(1000);
 
-                    drive.translateRange(.2, 90, 23);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
+                    //drive.translateRange(.2, 90, 22);
+                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    //telemetry.update();
+                    //sleep(1000);
 
-                    drive.translateTime(1.5, .2, 90);
-                    sleep(1000);
+                    //drive.translateTime(2, .2, 90);
+                    //sleep(1000);
 
-                    drive.translateRange(.2, 90, 23);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
+                    //drive.translateRange(.2, 90, 22);
+                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    //telemetry.update();
+                    //sleep(1000);
 
-                    drive.translateTime(.6, .2, 90);
-                    sleep(1000);
+                    //drive.translateTime(.6, .2, 90);
+                    //sleep(1000);
 
                     drive.translateRange(.2, 0, 10);
 

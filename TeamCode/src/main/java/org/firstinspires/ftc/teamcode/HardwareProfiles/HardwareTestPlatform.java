@@ -39,6 +39,7 @@ public class HardwareTestPlatform {
     public Servo servoLeft;                   //Declare the servo
     public Servo servoLiftRight;                   //Declare the servo
     public Servo servoLiftLeft;                   //Declare the servo
+    public Servo servoLinear;                   //Declare the servo
     public BNO055IMU imu = null;
     public ModernRoboticsI2cRangeSensor rangeSensor;
 
@@ -71,13 +72,13 @@ public class HardwareTestPlatform {
             mrGyro = (ModernRoboticsI2cGyro) sensorGyro;         //MR GyroNew
 
             //Define the color sensors
-            //I2cAddr i2CAddressColorRight = I2cAddr.create8bit(0x4c);
+            I2cAddr i2CAddressColorRight = I2cAddr.create8bit(0x4c);
             I2cAddr i2CAddressColorLeft = I2cAddr.create8bit(0x3c);
-            //colorSensorRight = hwMap.colorSensor.get("colorR"); //Map the sensor to the hardware
+            colorSensorRight = hwMap.colorSensor.get("colorR"); //Map the sensor to the hardware
             colorSensorLeft = hwMap.colorSensor.get("colorL"); //Map the sensor to the hardware
-            //colorSensorRight.setI2cAddress(i2CAddressColorRight);
+            colorSensorRight.setI2cAddress(i2CAddressColorRight);
             colorSensorLeft.setI2cAddress(i2CAddressColorLeft);
-            //colorSensorRight.enableLed(true);
+            colorSensorRight.enableLed(true);
             colorSensorLeft.enableLed(true);
 
             //Define the range sensor
@@ -126,6 +127,8 @@ public class HardwareTestPlatform {
             servoLeft = hwMap.servo.get("servo1");
             servoLiftRight = hwMap.servo.get("liftR");
             servoLiftLeft = hwMap.servo.get("liftL");
+            servoLinear = hwMap.servo.get("linear");
+
 
         }
     }

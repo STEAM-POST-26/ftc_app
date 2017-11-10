@@ -38,24 +38,13 @@ package org.firstinspires.ftc.teamcode.Opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.teamcode.HardwareProfiles.HardwareTestPlatform;
-import org.firstinspires.ftc.teamcode.Libs.DataLogger;
-import org.firstinspires.ftc.teamcode.Libs.VuforiaLib;
-
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Name the opMode and put it in the appropriate group
  */
-@Autonomous(name = "SETUP - Check Sensors", group = "SETUP")
+@Autonomous(name = "SETUP - Check Motors", group = "SETUP")
 /**
  * This opMode attempts to acquire and trigger the rightRed beacons.
  *
@@ -66,7 +55,7 @@ import java.util.Locale;
  *  -  The robot starts with the left side wheels just to the left of the seam between tiles 2 and 3
  *  on the rightRed team wall with tile one being the left most tile on the wall, ~ -1500 X from origin
  */
-public class AutoSetupSensor extends LinearOpMode {
+public class AutoSetupMotors extends LinearOpMode {
 
     /**
      * Instantiate all objects needed in this class
@@ -102,9 +91,22 @@ public class AutoSetupSensor extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            telemetry.addData("range", String.valueOf(robot.rangeSensor.rawUltrasonic()));
-            telemetry.addData("colorL", String.valueOf(robot.colorSensorLeft.argb()));
-            telemetry.addData("colorR", String.valueOf(robot.colorSensorRight.argb()));
+            robot.motorLF.setPower(1);
+            sleep(2000);
+            robot.motorLF.setPower(0);
+
+            robot.motorLR.setPower(1);
+            sleep(2000);
+            robot.motorLR.setPower(0);
+
+            robot.motorRF.setPower(1);
+            sleep(2000);
+            robot.motorRF.setPower(0);
+
+            robot.motorRR.setPower(1);
+            sleep(2000);
+            robot.motorRR.setPower(0);
+
             telemetry.update();
 
 

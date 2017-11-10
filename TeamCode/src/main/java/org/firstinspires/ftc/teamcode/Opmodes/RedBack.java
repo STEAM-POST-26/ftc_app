@@ -8,35 +8,26 @@ package org.firstinspires.ftc.teamcode.Opmodes;
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
-import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuMarkInstanceId;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.HardwareProfiles.HardwareTestPlatform;
 import org.firstinspires.ftc.teamcode.Libs.DataLogger;
 import org.firstinspires.ftc.teamcode.Libs.DriveMecanum;
-import org.firstinspires.ftc.teamcode.Libs.VuforiaLib;
 
 /**
  * Name the opMode and put it in the appropriate group
  */
-@Autonomous(name = "Mecanum Gyro VuMark", group = "COMP")
-@Disabled
-public class MecanumGyroVUMark extends LinearOpMode {
+@Autonomous(name = "Red Back", group = "COMP")
+
+public class RedBack extends LinearOpMode {
 
     /**
      * Instantiate all objects needed in this class
@@ -126,7 +117,8 @@ public class MecanumGyroVUMark extends LinearOpMode {
 
 
 
-        robot.servoLeft.setPosition(1);
+        robot.servoRight.setPosition(1);
+        robot.servoLeft.setPosition(0);
 
 
         sleep(2000);
@@ -151,7 +143,7 @@ public class MecanumGyroVUMark extends LinearOpMode {
                     drive.translateRange(.5, 0, 35);
                     state = State.HALT;
                     break;
-                case BALL_LEFT:
+                case BALL_RIGHT:
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
@@ -159,19 +151,22 @@ public class MecanumGyroVUMark extends LinearOpMode {
                     sleep(500);
                     robot.motorLift.setPower(0);
 
-                    robot.servoLeft.setPosition(1);
+                    robot.servoRight.setPosition(0);
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
-                    telemetry.addData("SERVO position", robot.servoLeft.getPosition());
+                    telemetry.addData("SERVO position", robot.servoRight.getPosition());
                     telemetry.update();
                     sleep(2000);
-                    if (robot.colorSensorLeft.blue() > robot.colorSensorLeft.red()) {  //Blue is back
-                        drive.translateTime(.8, .2, 0);
-                    }
-                    else {
+                    if (robot.colorSensorRight.blue() > robot.colorSensorRight.red()) {  //Blue is back
                         drive.translateTime(.8, .2, 180);
                     }
+                    else {
+                        drive.translateTime(.8, .2, 0);
+                    }
 
-                    robot.servoLeft.setPosition(0);
+                    robot.servoRight.setPosition(1);
+
+                    drive.translateRange(0.2, 0, 28);
+                    drive.translateTime(2, 0.2, 90);
 
                     state = State.CHECK_VU;
                     break;
@@ -195,54 +190,46 @@ public class MecanumGyroVUMark extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
+                    //back wall
                     drive.translateRange(.2, 0, 28);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateRange(.2, 90, 20);
+                    //read first fin
+                    drive.translateRange(.2, -90, 20);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(.5, .3, 90);
+                    drive.translateTime(2, .3, -90);
                     sleep(1000);
 
-                    drive.translateRange(.2, 0, 10);
-                    state = State.HALT;
-
-                    robot.servoLiftRight.setPosition(1);
-                    robot.servoLiftLeft.setPosition(0);
-
-                    state = State.HALT;
-
-                    break;
-
-                case CENTER:
-                    telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
-                    telemetry.update();
-
-                    drive.translateRange(.2, 0, 28);
+                    //read second fin
+                    drive.translateRange(.2, -90, 22);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateRange(.2, 90, 20);
+                    drive.translateTime(1.5, .3, -90);
+                    sleep(1000);
+
+                    //read third fin
+                    drive.translateRange(.2, -90, 22);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(2, .2, 90);
+                    drive.translateTime(1.7, .3, -90);
                     sleep(1000);
 
-                    drive.translateRange(.2, 90, 22);
+                    //read forth fin
+                    drive.translateRange(.2, -90, 22);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(.5, .3, 90);
-                    sleep(1000);
-
+                    //place block
                     drive.translateRange(.2, 0, 10);
 
                     robot.servoLiftRight.setPosition(1);
@@ -256,35 +243,72 @@ public class MecanumGyroVUMark extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
+                    //back wall
                     drive.translateRange(.2, 0, 28);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateRange(.2, 90, 23);
+                    //read first fin
+                    drive.translateRange(.2, -90, 20);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(2, .2, 90);
+                    drive.translateTime(2, .3, -90);
                     sleep(1000);
 
-                    drive.translateRange(.2, 90, 23);
+                    //read second fin
+                    drive.translateRange(.2, -90, 22);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(1.5, .2, 90);
-                    sleep(1000);
+                    //place block
+                    drive.translateRange(.2, 0, 10);
 
-                    drive.translateRange(.2, 90, 23);
+                    robot.servoLiftRight.setPosition(1);
+                    robot.servoLiftLeft.setPosition(0);
+
+                    state = State.HALT;
+
+                    break;
+
+                case CENTER:
+                    telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
+                    telemetry.update();
+
+                    //back wall
+                    drive.translateRange(.2, 0, 28);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(.6, .2, 90);
+                    //read first fin
+                    drive.translateRange(.2, -90, 20);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
                     sleep(1000);
 
+                    drive.translateTime(2, .3, -90);
+                    sleep(1000);
+
+                    //read second fin
+                    drive.translateRange(.2, -90, 22);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
+                    sleep(1000);
+
+                    drive.translateTime(1.5, .3, -90);
+                    sleep(1000);
+
+                    //read third fin
+                    drive.translateRange(.2, -90, 22);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
+                    sleep(1000);
+
+                    //place block
                     drive.translateRange(.2, 0, 10);
 
                     robot.servoLiftRight.setPosition(1);
@@ -365,7 +389,7 @@ public class MecanumGyroVUMark extends LinearOpMode {
                         telemetry.addData("vuMarkValue ", vuMarkValue);
                         telemetry.update();
                         sleep(1000);
-                        state = State.BALL_LEFT;  //The vuMark was found so move on to the next state
+                        state = State.BALL_RIGHT;  //The vuMark was found so move on to the next state
                     }
 
                     break;
@@ -441,7 +465,7 @@ public class MecanumGyroVUMark extends LinearOpMode {
      */
     enum State {
         HALT, DRIVE, TAIL, COLOR_SENSOR, RANGE, VUMark, DISPLAY, LEFT, BALL_LEFT, CHECK_VU, CENTER,
-        RIGHT, TEST
+        RIGHT, TEST, BALL_RIGHT
     }
 
 }
