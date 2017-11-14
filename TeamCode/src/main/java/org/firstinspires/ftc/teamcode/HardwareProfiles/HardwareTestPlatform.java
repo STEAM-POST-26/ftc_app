@@ -29,6 +29,7 @@ public class HardwareTestPlatform {
     public DcMotor motorLR = null;              //Declare the motor
     public DcMotor motorRR = null;              //Declare the motor
     public DcMotor motorLift = null;          //Declare the motor
+    public DcMotor motorRelic = null;          //Declare the motor
     public OpticalDistanceSensor ods;           //Declare the sensor
     public ColorSensor colorSensorRight;        //Declare the Color Sensor
     public ColorSensor colorSensorLeft;        //Declare the Color Sensor
@@ -115,6 +116,11 @@ public class HardwareTestPlatform {
             motorLift.setPower(0);
             motorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             motorLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            motorRelic = hwMap.dcMotor.get("relic");
+            motorRelic.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+            motorRelic.setPower(0);
+            motorRelic.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             //motorLift = hwMap.dcMotor.get("lift");
             //motorLift.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors

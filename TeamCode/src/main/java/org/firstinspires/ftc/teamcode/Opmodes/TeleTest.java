@@ -33,7 +33,6 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.firstinspires.ftc.teamcode.Opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.HardwareProfiles.HardwareTestPlatform;
 
@@ -51,9 +50,9 @@ import org.firstinspires.ftc.teamcode.HardwareProfiles.HardwareTestPlatform;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop", group = "COMP")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop Test", group = "COMP")
 
-public class TeleOpMecanum extends LinearOpMode {
+public class TeleTest extends LinearOpMode {
     /**
      * Instantiate all objects needed in this class
      */
@@ -70,10 +69,6 @@ public class TeleOpMecanum extends LinearOpMode {
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
-
-        robot.servoLeft.setPosition(0);
-        robot.servoRight.setPosition(1);
-        robot.servoLinear.setPosition(.2);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hello Driver");    //
@@ -110,25 +105,25 @@ public class TeleOpMecanum extends LinearOpMode {
             }
 
             if (gamepad1.right_trigger > 0) {
-                robot.motorLift.setPower(1);
+                robot.motorLift.setPower(.5);
             }
             else {
                 robot.motorLift.setPower(0);
             }
 
             if (gamepad1.left_trigger > 0) {
-                robot.motorLift.setPower(-1);
+                robot.motorLift.setPower(-.5);
             }
             else {
                 robot.motorLift.setPower(0);
             }
 
-            if (gamepad1.a == true)
+            if (gamepad1.b == true)
             {
                 robot.servoLinear.setPosition(1);
             }
 
-            if (gamepad1.b == true)
+            if (gamepad1.a == true)
             {
                 robot.servoLinear.setPosition(.2);
             }
@@ -138,6 +133,33 @@ public class TeleOpMecanum extends LinearOpMode {
             }
             else {
                 robot.motorRelic.setPower(0);
+            }
+
+            if (gamepad1.x == true) {
+                robot.motorRelic.setPower(-.5);
+            }
+            else {
+                robot.motorRelic.setPower(0);
+            }
+
+            if (gamepad2.a == true) {
+                //Down
+                robot.servoRight.setPosition(0);
+            }
+
+            if (gamepad2.b == true) {
+                //Up
+                robot.servoRight.setPosition(1);
+            }
+
+            if (gamepad2.x == true) {
+                //Up
+                robot.servoLeft.setPosition(0);
+            }
+
+            if (gamepad2.y == true) {
+                //Down
+                robot.servoLeft.setPosition(1);
             }
 
             telemetry.addData("left_stick_x", String.valueOf(gamepad1.left_stick_x));

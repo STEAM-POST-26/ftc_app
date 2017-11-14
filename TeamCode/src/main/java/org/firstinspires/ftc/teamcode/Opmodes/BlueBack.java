@@ -118,7 +118,8 @@ public class BlueBack extends LinearOpMode {
 
 
         robot.servoLeft.setPosition(1);
-        robot.servoRight.setPosition(0);
+        robot.servoRight.setPosition(1);
+        robot.servoLinear.setPosition(.2);
 
 
         sleep(2000);
@@ -151,7 +152,7 @@ public class BlueBack extends LinearOpMode {
                     sleep(750);
                     robot.motorLift.setPower(0);
 
-                    robot.servoRight.setPosition(0);
+                    robot.servoRight.setPosition(1);
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.addData("SERVO position", robot.servoLeft.getPosition());
                     telemetry.update();
@@ -187,21 +188,20 @@ public class BlueBack extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
-                    drive.translateRange(.2, 0, 28);
+                    drive.translateRange(.2, 0, 26);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateRange(.2, 90, 20);
+                    drive.translateRange(.2, 90, 22);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(.5, .3, 90);
+                    drive.translateTime(.75, .2, 90);
                     sleep(1000);
 
                     drive.translateRange(.2, 0, 10);
-                    state = State.HALT;
 
                     robot.servoLiftRight.setPosition(1);
                     robot.servoLiftLeft.setPosition(0);
@@ -214,17 +214,9 @@ public class BlueBack extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
-                    drive.translateRange(.2, 0, 28);
+                    drive.translateRange(.2, 0, 26);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
-                    sleep(1000);
-
-                    drive.translateRange(.2, 90, 20);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
-
-                    drive.translateTime(2, .2, 90);
                     sleep(1000);
 
                     drive.translateRange(.2, 90, 22);
@@ -232,7 +224,7 @@ public class BlueBack extends LinearOpMode {
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(.5, .3, 90);
+                    drive.translateTime(3.25, .2, 90);
                     sleep(1000);
 
                     drive.translateRange(.2, 0, 10);
@@ -248,7 +240,7 @@ public class BlueBack extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
-                    drive.translateRange(.2, 0, 25);
+                    drive.translateRange(.2, 0, 26);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
@@ -258,24 +250,8 @@ public class BlueBack extends LinearOpMode {
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(5, .2, 90);
+                    drive.translateTime(5.5, .2, 90);
                     sleep(1000);
-
-                    //drive.translateRange(.2, 90, 22);
-                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    //telemetry.update();
-                    //sleep(1000);
-
-                    //drive.translateTime(2, .2, 90);
-                    //sleep(1000);
-
-                    //drive.translateRange(.2, 90, 22);
-                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    //telemetry.update();
-                    //sleep(1000);
-
-                    //drive.translateTime(.6, .2, 90);
-                    //sleep(1000);
 
                     drive.translateRange(.2, 0, 10);
 

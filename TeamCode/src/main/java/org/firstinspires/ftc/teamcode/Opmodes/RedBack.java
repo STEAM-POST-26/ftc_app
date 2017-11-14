@@ -104,6 +104,10 @@ public class RedBack extends LinearOpMode {
 
         DriveMecanum drive = new DriveMecanum(robot, opMode, Dl);
 
+        robot.servoRight.setPosition(1);
+        robot.servoLeft.setPosition(0);
+        robot.servoLinear.setPosition(.2);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         sleep(1000);
@@ -117,8 +121,7 @@ public class RedBack extends LinearOpMode {
 
 
 
-        robot.servoRight.setPosition(1);
-        robot.servoLeft.setPosition(0);
+
 
 
         sleep(2000);
@@ -165,7 +168,7 @@ public class RedBack extends LinearOpMode {
 
                     robot.servoRight.setPosition(1);
 
-                    drive.translateRange(0.2, 0, 28);
+                    drive.translateRange(0.2, 0, 25);
                     drive.translateTime(2, 0.2, 90);
 
                     state = State.CHECK_VU;
@@ -190,43 +193,13 @@ public class RedBack extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
-                    //back wall
-                    drive.translateRange(.2, 0, 28);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
-
                     //read first fin
-                    drive.translateRange(.2, -90, 20);
+                    drive.translateRange(.2, -90, 25);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(2, .3, -90);
-                    sleep(1000);
-
-                    //read second fin
-                    drive.translateRange(.2, -90, 22);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
-
-                    drive.translateTime(1.5, .3, -90);
-                    sleep(1000);
-
-                    //read third fin
-                    drive.translateRange(.2, -90, 22);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
-
-                    drive.translateTime(1.7, .3, -90);
-                    sleep(1000);
-
-                    //read forth fin
-                    drive.translateRange(.2, -90, 22);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
+                    drive.translateTime(7, .2, -90);
                     sleep(1000);
 
                     //place block
@@ -243,25 +216,13 @@ public class RedBack extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
-                    //back wall
-                    drive.translateRange(.2, 0, 28);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
-
                     //read first fin
-                    drive.translateRange(.2, -90, 20);
+                    drive.translateRange(.2, -90, 25);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(2, .3, -90);
-                    sleep(1000);
-
-                    //read second fin
-                    drive.translateRange(.2, -90, 22);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
+                    drive.translateTime(2.75, .2, -90);
                     sleep(1000);
 
                     //place block
@@ -278,34 +239,13 @@ public class RedBack extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
-                    //back wall
-                    drive.translateRange(.2, 0, 28);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
-
                     //read first fin
-                    drive.translateRange(.2, -90, 20);
+                    drive.translateRange(.2, -90, 25);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(2, .3, -90);
-                    sleep(1000);
-
-                    //read second fin
-                    drive.translateRange(.2, -90, 22);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
-
-                    drive.translateTime(1.5, .3, -90);
-                    sleep(1000);
-
-                    //read third fin
-                    drive.translateRange(.2, -90, 22);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
+                    drive.translateTime(5, .2, -90);
                     sleep(1000);
 
                     //place block
