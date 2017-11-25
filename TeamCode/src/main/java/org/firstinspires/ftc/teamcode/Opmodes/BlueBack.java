@@ -156,7 +156,7 @@ public class BlueBack extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.addData("SERVO position", robot.servoLeft.getPosition());
                     telemetry.update();
-                    sleep(2000);
+
                     if (robot.colorSensorLeft.blue() > robot.colorSensorLeft.red()) {  //Blue is back
                         drive.translateTime(.8, .2, 0);
                     }
@@ -203,8 +203,11 @@ public class BlueBack extends LinearOpMode {
 
                     drive.translateRange(.2, 0, 10);
 
-                    robot.servoLiftRight.setPosition(1);
-                    robot.servoLiftLeft.setPosition(0);
+                    robot.servoLiftRight.setPosition(0);
+                    robot.servoLiftLeft.setPosition(1);
+
+                    sleep(2000);
+                    drive.translateTime(.5,.5, 180);
 
                     state = State.HALT;
 
@@ -224,13 +227,17 @@ public class BlueBack extends LinearOpMode {
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(3.25, .2, 90);
+                    drive.translateTime(3, .2, 90);
                     sleep(1000);
 
                     drive.translateRange(.2, 0, 10);
 
-                    robot.servoLiftRight.setPosition(1);
-                    robot.servoLiftLeft.setPosition(0);
+
+                    robot.servoLiftRight.setPosition(0);
+                    robot.servoLiftLeft.setPosition(1);
+
+                    sleep(2000);
+                    drive.translateTime(.5,.5, 180);
 
                     state = State.HALT;
 
@@ -255,9 +262,12 @@ public class BlueBack extends LinearOpMode {
 
                     drive.translateRange(.2, 0, 10);
 
-                    robot.servoLiftRight.setPosition(1);
-                    robot.servoLiftLeft.setPosition(0);
 
+                    robot.servoLiftRight.setPosition(0);
+                    robot.servoLiftLeft.setPosition(1);
+
+                    sleep(2000);
+                    drive.translateTime(.5,.5, 180);
                     state = State.HALT;
 
                     break;

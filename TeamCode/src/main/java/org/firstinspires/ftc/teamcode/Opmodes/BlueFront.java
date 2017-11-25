@@ -25,9 +25,9 @@ import org.firstinspires.ftc.teamcode.Libs.DriveMecanum;
 /**
  * Name the opMode and put it in the appropriate group
  */
-@Autonomous(name = "Red Back", group = "COMP")
+@Autonomous(name = "Blue Front", group = "COMP")
 
-public class RedBack extends LinearOpMode {
+public class BlueFront extends LinearOpMode {
 
     /**
      * Instantiate all objects needed in this class
@@ -104,10 +104,6 @@ public class RedBack extends LinearOpMode {
 
         DriveMecanum drive = new DriveMecanum(robot, opMode, Dl);
 
-        robot.servoRight.setPosition(1);
-        robot.servoLeft.setPosition(0);
-        robot.servoLinear.setPosition(.2);
-
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         sleep(1000);
@@ -121,7 +117,9 @@ public class RedBack extends LinearOpMode {
 
 
 
-
+        robot.servoLeft.setPosition(1);
+        robot.servoRight.setPosition(1);
+        robot.servoLinear.setPosition(.2);
 
 
         sleep(2000);
@@ -146,30 +144,27 @@ public class RedBack extends LinearOpMode {
                     drive.translateRange(.5, 0, 35);
                     state = State.HALT;
                     break;
-                case BALL_RIGHT:
+                case BALL_LEFT:
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
 
                     robot.motorLift.setPower(1);
-                    sleep(500);
+                    sleep(750);
                     robot.motorLift.setPower(0);
 
-                    robot.servoRight.setPosition(0);
+                    robot.servoRight.setPosition(1);
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
-                    telemetry.addData("SERVO position", robot.servoRight.getPosition());
+                    telemetry.addData("SERVO position", robot.servoLeft.getPosition());
                     telemetry.update();
-                    sleep(2000);
-                    if (robot.colorSensorRight.blue() > robot.colorSensorRight.red()) {  //Blue is back
-                        drive.translateTime(.8, .2, 180);
-                    }
-                    else {
+
+                    if (robot.colorSensorLeft.blue() > robot.colorSensorLeft.red()) {  //Blue is back
                         drive.translateTime(.8, .2, 0);
                     }
+                    else {
+                        drive.translateTime(.8, .2, 180);
+                    }
 
-                    robot.servoRight.setPosition(1);
-
-                    drive.translateRange(0.2, 0, 25);
-                    drive.translateTime(2, 0.2, 90);
+                    robot.servoLeft.setPosition(0);
 
                     state = State.CHECK_VU;
                     break;
@@ -194,44 +189,29 @@ public class RedBack extends LinearOpMode {
                     telemetry.update();
 
                     //read first fin
-                    drive.translateRange(.2, -90, 25);
+                    drive.translateTime(1.5, 1, 0);
+                    sleep(500);
+                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    //telemetry.update();
+
+                    drive.pivotLeft(.2, 90);
+
+                    drive.translateTime(2, .2, -90);
+
+                    drive.translateRange(.2, 0, 26);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(7, .2, -90);
-                    sleep(1000);
-
-                    //place block
-                    drive.translateRange(.2, 0, 10);
-
-
-                    robot.servoLiftRight.setPosition(0);
-                    robot.servoLiftLeft.setPosition(1);
-
-                    sleep(2000);
-                    drive.translateTime(.5,.5, 180);
-
-                    state = State.HALT;
-
-                    break;
-
-                case RIGHT:
-                    telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
-                    telemetry.update();
-
-                    //read first fin
-                    drive.translateRange(.2, -90, 25);
+                    drive.translateRange(.2, 90, 22);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(2.75, .2, -90);
+                    drive.translateTime(.75, .2, 90);
                     sleep(1000);
 
-                    //place block
                     drive.translateRange(.2, 0, 10);
-
 
                     robot.servoLiftRight.setPosition(0);
                     robot.servoLiftLeft.setPosition(1);
@@ -248,17 +228,29 @@ public class RedBack extends LinearOpMode {
                     telemetry.update();
 
                     //read first fin
-                    drive.translateRange(.2, -90, 25);
+                    drive.translateTime(1.5, 1, 0);
+                    sleep(500);
+                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    //telemetry.update();
+
+                    drive.pivotLeft(.2, 88);
+
+                    drive.translateTime(2, .2, -90);
+
+                    drive.translateRange(.2, 0, 26);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(5, .2, -90);
+                    drive.translateRange(.2, 90, 22);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
                     sleep(1000);
 
-                    //place block
-                    drive.translateRange(.2, 0, 10);
+                    drive.translateTime(3.25, .2, 90);
+                    sleep(1000);
 
+                    drive.translateRange(.2, 0, 10);
 
                     robot.servoLiftRight.setPosition(0);
                     robot.servoLiftLeft.setPosition(1);
@@ -270,34 +262,40 @@ public class RedBack extends LinearOpMode {
 
                     break;
 
-                case DRIVE:
-                    robot.motorLift.setPower(1);
-                    sleep(500);
-                    robot.motorLift.setPower(0);
-
-                    robot.servoLeft.setPosition(1);
-                    telemetry.addData("SERVO position", robot.servoLeft.getPosition());
+                case RIGHT:
+                    telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
+
+                    //read first fin
+                    drive.translateTime(1.5, 1, 0);
+                    sleep(500);
+                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    //telemetry.update();
+
+                    drive.pivotLeft(.2, 88);
+
+                    drive.translateTime(2, .2, -90);
+
+                    drive.translateRange(.2, 0, 26);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
+                    sleep(1000);
+
+                    drive.translateRange(.2, 90, 22);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
+                    sleep(1000);
+
+                    drive.translateTime(5.25, .2, 90);
+                    sleep(1000);
+
+                    drive.translateRange(.2, 0, 10);
+
+                    robot.servoLiftRight.setPosition(0);
+                    robot.servoLiftLeft.setPosition(1);
+
                     sleep(2000);
-                    if (robot.colorSensorLeft.blue() > robot.colorSensorLeft.red()) {  //Blue is back
-                        drive.translateTime(.4, .5, 0);
-                    }
-                    else {
-                        drive.translateTime(.4, .5, 180);
-                    }
-
-                    robot.servoLeft.setPosition(0);
-
-                    drive.translateRange(.2, 0, 35);
-
-                    drive.translateRange(.2, 90, 30);
-
-                    drive.translateRange(.5, 0, 13);
-
-                    robot.servoLiftRight.setPosition(1);
-                    robot.servoLiftLeft.setPosition(0);
-
-                    drive.translateTime(.5, .5, 180);
+                    drive.translateTime(.5,.5, 180);
 
                     state = State.HALT;
 
@@ -341,7 +339,7 @@ public class RedBack extends LinearOpMode {
                         telemetry.addData("vuMarkValue ", vuMarkValue);
                         telemetry.update();
                         sleep(1000);
-                        state = State.BALL_RIGHT;  //The vuMark was found so move on to the next state
+                        state = State.BALL_LEFT;  //The vuMark was found so move on to the next state
                     }
 
                     break;
@@ -417,7 +415,7 @@ public class RedBack extends LinearOpMode {
      */
     enum State {
         HALT, DRIVE, TAIL, COLOR_SENSOR, RANGE, VUMark, DISPLAY, LEFT, BALL_LEFT, CHECK_VU, CENTER,
-        RIGHT, TEST, BALL_RIGHT
+        RIGHT, TEST
     }
 
 }

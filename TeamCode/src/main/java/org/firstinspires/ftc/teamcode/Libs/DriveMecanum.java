@@ -252,6 +252,47 @@ public class DriveMecanum {
         motorsHalt();
 
     }
+
+    public void translateRangeTimeOut(double power, double heading, int range, double timeOut) {
+        double timeOutTime;
+        procedure = "translateTime";
+        initZ = robot.mrGyro.getIntegratedZValue();
+        radians = getRadians(heading);
+        timeOutTime = opMode.getRuntime() + timeOut;
+
+        while (opMode.opModeIsActive() &&
+                robot.rangeSensor.rawUltrasonic() > range &&
+                opMode.getRuntime() < timeOutTime) {
+            LF = calcLF(radians, power);
+            RF = calcRF(radians, power);
+            LR = calcLR(radians, power);
+            RR = calcRR(radians, power);
+
+            currentZint = robot.mrGyro.getIntegratedZValue();
+
+            if (currentZint != initZ) {  //Robot has drifted off course
+                zCorrection = Math.abs(initZ - currentZint);
+
+                courseCorrect();
+            } else {
+                zCorrection = 0;
+            }
+
+            setPower(LF, LR, RF, RR);
+
+            myCurrentMotorPosition = robot.motorLF.getCurrentPosition();
+
+            if (tel) {
+                telemetry();
+                logData();
+            }
+
+            opMode.idle();
+        }
+
+        motorsHalt();
+
+    }
     /**
      * Translate on a heading for a defined period of time.
      */

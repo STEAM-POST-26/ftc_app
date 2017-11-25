@@ -41,6 +41,8 @@ public class HardwareTestPlatform {
     public Servo servoLiftRight;                   //Declare the servo
     public Servo servoLiftLeft;                   //Declare the servo
     public Servo servoLinear;                   //Declare the servo
+    public Servo servoBack;                   //Declare the servo
+    public Servo servoFront;                   //Declare the servo
     public BNO055IMU imu = null;
     public ModernRoboticsI2cRangeSensor rangeSensor;
 
@@ -134,6 +136,8 @@ public class HardwareTestPlatform {
             servoLiftRight = hwMap.servo.get("liftR");
             servoLiftLeft = hwMap.servo.get("liftL");
             servoLinear = hwMap.servo.get("linear");
+            servoBack = hwMap.servo.get("back");
+            servoFront = hwMap.servo.get("front");
 
 
         }

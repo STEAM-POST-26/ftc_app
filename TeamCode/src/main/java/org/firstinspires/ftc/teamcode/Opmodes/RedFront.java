@@ -25,9 +25,9 @@ import org.firstinspires.ftc.teamcode.Libs.DriveMecanum;
 /**
  * Name the opMode and put it in the appropriate group
  */
-@Autonomous(name = "Red Back", group = "COMP")
+@Autonomous(name = "Red Front", group = "COMP")
 
-public class RedBack extends LinearOpMode {
+public class RedFront extends LinearOpMode {
 
     /**
      * Instantiate all objects needed in this class
@@ -142,10 +142,6 @@ public class RedBack extends LinearOpMode {
              */
 
             switch (state) {
-                case TEST:
-                    drive.translateRange(.5, 0, 35);
-                    state = State.HALT;
-                    break;
                 case BALL_RIGHT:
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
@@ -167,9 +163,6 @@ public class RedBack extends LinearOpMode {
                     }
 
                     robot.servoRight.setPosition(1);
-
-                    drive.translateRange(0.2, 0, 25);
-                    drive.translateTime(2, 0.2, 90);
 
                     state = State.CHECK_VU;
                     break;
@@ -194,15 +187,29 @@ public class RedBack extends LinearOpMode {
                     telemetry.update();
 
                     //read first fin
-                    drive.translateRange(.2, -90, 25);
+                    drive.translateTime(1.5,1,0);
+                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    //telemetry.update();
+                    sleep(1000);
+
+                    drive.pivotRight(.2, 90);
+
+                    drive.translateTime(5, .2, -90);
+
+
+                    drive.translateRange(.2, 0, 26);
                     telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     telemetry.update();
                     sleep(1000);
 
-                    drive.translateTime(7, .2, -90);
+                    drive.translateRange(.2, 90, 22);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
                     sleep(1000);
 
-                    //place block
+                    drive.translateTime(1, .2, 90);
+                    sleep(1000);
+
                     drive.translateRange(.2, 0, 10);
 
 
@@ -211,33 +218,18 @@ public class RedBack extends LinearOpMode {
 
                     sleep(2000);
                     drive.translateTime(.5,.5, 180);
-
                     state = State.HALT;
-
-                    break;
-
-                case RIGHT:
-                    telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
-                    telemetry.update();
-
-                    //read first fin
-                    drive.translateRange(.2, -90, 25);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
-
-                    drive.translateTime(2.75, .2, -90);
-                    sleep(1000);
+                    //sleep(1000);
 
                     //place block
-                    drive.translateRange(.2, 0, 10);
+                    //drive.translateRange(.2, 0, 10);
 
 
-                    robot.servoLiftRight.setPosition(0);
-                    robot.servoLiftLeft.setPosition(1);
+                    //robot.servoLiftRight.setPosition(0);
+                    //robot.servoLiftLeft.setPosition(1);
 
                     sleep(2000);
-                    drive.translateTime(.5,.5, 180);
+                    //drive.translateTime(.5,.5, 180);
 
                     state = State.HALT;
 
@@ -248,56 +240,96 @@ public class RedBack extends LinearOpMode {
                     telemetry.update();
 
                     //read first fin
-                    drive.translateRange(.2, -90, 25);
-                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
-                    telemetry.update();
-                    sleep(1000);
+                    drive.translateTime(1.5,1,0);
+                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    //telemetry.update();
+
+                    drive.pivotRight(.2, 90);
 
                     drive.translateTime(5, .2, -90);
-                    sleep(1000);
 
-                    //place block
+
+                    drive.translateRange(.2, 0, 26);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
+
+                    drive.translateRange(.2, 90, 22);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
+
+                    drive.translateTime(3.5, .2, 90);
+
+
                     drive.translateRange(.2, 0, 10);
 
 
                     robot.servoLiftRight.setPosition(0);
                     robot.servoLiftLeft.setPosition(1);
 
-                    sleep(2000);
+                    sleep(1000);
                     drive.translateTime(.5,.5, 180);
+                    state = State.HALT;
+                    //sleep(1000);
+
+                    //place block
+                    //drive.translateRange(.2, 0, 10);
+
+
+                    //robot.servoLiftRight.setPosition(0);
+                    //robot.servoLiftLeft.setPosition(1);
+
+                    sleep(2000);
+                    //drive.translateTime(.5,.5, 180);
 
                     state = State.HALT;
 
                     break;
 
-                case DRIVE:
-                    robot.motorLift.setPower(1);
-                    sleep(500);
-                    robot.motorLift.setPower(0);
-
-                    robot.servoLeft.setPosition(1);
-                    telemetry.addData("SERVO position", robot.servoLeft.getPosition());
+                case RIGHT:
+                    telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.update();
+
+                    //read first fin
+                    drive.translateTime(1.5, 1, 0);
+                    sleep(500);
+                    //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    //telemetry.update();
+
+                    drive.pivotRight(.2, 88);
+
+                    drive.translateTime(5, .2, -90);
+
+
+                    drive.translateRange(.2, 0, 27);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
+
+                    drive.translateRange(.2, 90, 21);
+                    telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
+                    telemetry.update();
+
+                    drive.translateTime(5.5, .2, 90);
+
+                    drive.translateRange(.2, 0, 10);
+
+
+                    robot.servoLiftRight.setPosition(0);
+                    robot.servoLiftLeft.setPosition(1);
+
+                    sleep(1000);
+                    drive.translateTime(.5,.5, 180);
+                    state = State.HALT;
+                    //sleep(1000);
+
+                    //place block
+                    //drive.translateRange(.2, 0, 10);
+
+
+                    //robot.servoLiftRight.setPosition(0);
+                    //robot.servoLiftLeft.setPosition(1);
+
                     sleep(2000);
-                    if (robot.colorSensorLeft.blue() > robot.colorSensorLeft.red()) {  //Blue is back
-                        drive.translateTime(.4, .5, 0);
-                    }
-                    else {
-                        drive.translateTime(.4, .5, 180);
-                    }
-
-                    robot.servoLeft.setPosition(0);
-
-                    drive.translateRange(.2, 0, 35);
-
-                    drive.translateRange(.2, 90, 30);
-
-                    drive.translateRange(.5, 0, 13);
-
-                    robot.servoLiftRight.setPosition(1);
-                    robot.servoLiftLeft.setPosition(0);
-
-                    drive.translateTime(.5, .5, 180);
+                    //drive.translateTime(.5,.5, 180);
 
                     state = State.HALT;
 

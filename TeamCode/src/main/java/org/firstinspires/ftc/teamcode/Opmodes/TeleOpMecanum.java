@@ -71,7 +71,7 @@ public class TeleOpMecanum extends LinearOpMode {
          */
         robot.init(hardwareMap);
 
-        robot.servoLeft.setPosition(0);
+        robot.servoLeft.setPosition(0.5); //0.6
         robot.servoRight.setPosition(1);
         robot.servoLinear.setPosition(.2);
 
@@ -84,6 +84,7 @@ public class TeleOpMecanum extends LinearOpMode {
         telemetry.addData("TeleOpRearWheelDrive Active", "");    //
         telemetry.update();
         // run until the end of the match (driver presses STOP)
+        Boolean clawState = false;
         while (opModeIsActive()) {
 
             double r = Math.hypot((gamepad1.left_stick_x * -1), gamepad1.left_stick_y);
@@ -105,8 +106,8 @@ public class TeleOpMecanum extends LinearOpMode {
             }
 
             if (gamepad1.left_bumper) {
-                robot.servoLiftRight.setPosition(0);
-                robot.servoLiftLeft.setPosition(1);
+                robot.servoLiftRight.setPosition(0.2);
+                robot.servoLiftLeft.setPosition(0.8);
             }
 
             if (gamepad1.right_trigger > 0) {
@@ -125,7 +126,7 @@ public class TeleOpMecanum extends LinearOpMode {
 
             if (gamepad1.a == true)
             {
-                robot.servoLinear.setPosition(1);
+                robot.servoLinear.setPosition(.55);
             }
 
             if (gamepad1.b == true)
@@ -138,6 +139,24 @@ public class TeleOpMecanum extends LinearOpMode {
             }
             else {
                 robot.motorRelic.setPower(0);
+            }
+
+            if (gamepad1.x == true) {
+
+                if (clawState == true){
+                    robot.servoBack.setPosition(0);
+                    robot.servoFront.setPosition(0.9);
+                    clawState = false;
+                    sleep(50);
+                }
+                else if (clawState == false){
+                    robot.servoBack.setPosition(0.9);
+                    robot.servoFront.setPosition(0);
+                    clawState = true;
+                    sleep(50);
+                }
+                //robot.servoBack.setPosition();
+                //robot.servoFront.setPosition();
             }
 
             telemetry.addData("left_stick_x", String.valueOf(gamepad1.left_stick_x));
