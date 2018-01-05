@@ -157,6 +157,14 @@ public class BlueFront extends LinearOpMode {
                     telemetry.addData("SERVO position", robot.servoLeft.getPosition());
                     telemetry.update();
 
+                    while (opModeIsActive() && robot.colorSensorLeft.blue() == 0 &&
+                            robot.colorSensorLeft.red() == 0) {
+                        telemetry.addData("Reading Color", "READING COLOR");
+                        telemetry.addData("Blue", String.valueOf(robot.colorSensorRight.blue()));
+                        telemetry.addData("Red", String.valueOf(robot.colorSensorRight.red()));
+                        telemetry.update();
+                    }
+
                     if (robot.colorSensorLeft.blue() > robot.colorSensorLeft.red()) {  //Blue is back
                         drive.translateTime(.8, .2, 0);
                     }

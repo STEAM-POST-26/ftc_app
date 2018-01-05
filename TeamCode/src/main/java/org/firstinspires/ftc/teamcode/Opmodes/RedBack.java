@@ -157,12 +157,25 @@ public class RedBack extends LinearOpMode {
                     robot.servoRight.setPosition(0);
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.addData("SERVO position", robot.servoRight.getPosition());
+                    telemetry.addData("Blue", String.valueOf(robot.colorSensorRight.blue()));
+                    telemetry.addData("Red", String.valueOf(robot.colorSensorRight.red()));
                     telemetry.update();
-                    sleep(2000);
+
+                    while (opModeIsActive() && robot.colorSensorRight.blue() == 0 &&
+                            robot.colorSensorRight.red() == 0) {
+                        telemetry.addData("Reading Color", "READING COLOR");
+                        telemetry.addData("Blue", String.valueOf(robot.colorSensorRight.blue()));
+                        telemetry.addData("Red", String.valueOf(robot.colorSensorRight.red()));
+                        telemetry.update();
+                    }
                     if (robot.colorSensorRight.blue() > robot.colorSensorRight.red()) {  //Blue is back
+                        telemetry.addData("Drive", String.valueOf("BACKWARD"));
+                        telemetry.update();
                         drive.translateTime(.8, .2, 180);
                     }
                     else {
+                        telemetry.addData("Drive", String.valueOf("BACKWARD"));
+                        telemetry.update();
                         drive.translateTime(.8, .2, 0);
                     }
 

@@ -103,8 +103,12 @@ public class AutoSetupSensor extends LinearOpMode {
         while (opModeIsActive()) {
 
             telemetry.addData("range", String.valueOf(robot.rangeSensor.rawUltrasonic()));
-            telemetry.addData("colorL", String.valueOf(robot.colorSensorLeft.argb()));
-            telemetry.addData("colorR", String.valueOf(robot.colorSensorRight.argb()));
+            telemetry.addData("colorL Blue", String.valueOf(robot.colorSensorLeft.blue()));
+            telemetry.addData("colorL Red", String.valueOf(robot.colorSensorLeft.red()));
+            telemetry.addData("colorL RGB", String.valueOf(robot.colorSensorLeft.argb()));
+            telemetry.addData("colorR Blue", String.valueOf(robot.colorSensorRight.blue()));
+            telemetry.addData("colorR Red", String.valueOf(robot.colorSensorRight.red()));
+            telemetry.addData("colorL RGB", String.valueOf(robot.colorSensorRight.argb()));
             telemetry.update();
 
 

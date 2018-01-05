@@ -93,22 +93,23 @@ public class TeleOpDavid extends LinearOpMode {
             double r = Math.hypot((gamepad1.left_stick_x * -1), gamepad1.left_stick_y);
             double robotAngle = Math.atan2((gamepad1.left_stick_y * -1), (gamepad1.left_stick_x )) - Math.PI / 4;
             double rightX = gamepad1.right_stick_x;
-            final double v1 = r * Math.cos(robotAngle) + rightX;
-            final double v2 = r * Math.sin(robotAngle) - rightX;
-            final double v3 = r * Math.sin(robotAngle) + rightX;
-            final double v4 = r * Math.cos(robotAngle) - rightX;
+            double rightY = gamepad1.right_stick_y;
+            final double v1 = r * Math.cos(robotAngle) + rightX - rightY;
+            final double v2 = r * Math.sin(robotAngle) - rightX - rightY;
+            final double v3 = r * Math.sin(robotAngle) + rightX - rightY;
+            final double v4 = r * Math.cos(robotAngle) - rightX - rightY;
 
             robot.motorLF.setPower(v1);
             robot.motorRF.setPower(v2);
             robot.motorLR.setPower(v3);
             robot.motorRR.setPower(v4);
 
-            if (gamepad1.a == true) {
+            if (gamepad1.a == true) {  //Relic Grabber
 
                 if (aValue < runtime.time()) {
                     if (robot.servoLiftLeft.getPosition() < 0.25) {
-                        robot.servoLiftRight.setPosition(0.2);
-                        robot.servoLiftLeft.setPosition(0.75);
+                        robot.servoLiftRight.setPosition(0.3); //.2
+                        robot.servoLiftLeft.setPosition(0.55); //.75
                     } else {
                         robot.servoLiftRight.setPosition(1);
                         robot.servoLiftLeft.setPosition(0);

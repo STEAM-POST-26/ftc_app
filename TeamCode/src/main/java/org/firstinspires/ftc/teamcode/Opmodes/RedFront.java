@@ -154,7 +154,14 @@ public class RedFront extends LinearOpMode {
                     telemetry.addData("VUMARK", String.valueOf(vuMarkValue));
                     telemetry.addData("SERVO position", robot.servoRight.getPosition());
                     telemetry.update();
-                    sleep(2000);
+
+                    while (opModeIsActive() && robot.colorSensorRight.blue() == 0 &&
+                            robot.colorSensorRight.red() == 0) {
+                        telemetry.addData("Reading Color", "READING COLOR");
+                        telemetry.addData("Blue", String.valueOf(robot.colorSensorRight.blue()));
+                        telemetry.addData("Red", String.valueOf(robot.colorSensorRight.red()));
+                        telemetry.update();
+                    }
                     if (robot.colorSensorRight.blue() > robot.colorSensorRight.red()) {  //Blue is back
                         drive.translateTime(.8, .2, 180);
                     }
@@ -244,9 +251,9 @@ public class RedFront extends LinearOpMode {
                     //telemetry.addData("Range", String.valueOf(robot.rangeSensor.cmUltrasonic()));
                     //telemetry.update();
 
-                    drive.pivotRight(.2, 90);
+                    drive.pivotRight(.2, 87);
 
-                    drive.translateTime(5, .2, -90);
+                    drive.translateTime(7.5, .2, -90);
 
 
                     drive.translateRange(.2, 0, 26);
